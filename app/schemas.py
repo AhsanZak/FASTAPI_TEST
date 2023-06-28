@@ -6,11 +6,12 @@ T = TypeVar('T')
 
 class StudentSchema(BaseModel):
     id: Optional[int]=None
-    full_name: Optional[str]=None
-    email: Optional[str]=None
-    phone_number: Optional[int]=None
-    password: Optional[str]=None
-    
+    full_name: str
+    email: str
+    phone_number: int
+    password: str
+    profile_image: str
+
     class Config:
         orm_mode = True
 

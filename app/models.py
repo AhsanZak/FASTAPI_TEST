@@ -6,7 +6,7 @@ class Students(Base):
 
     id = Column(Integer, primary_key=True)
     full_name = Column(String)
-    email = Column(String)
+    email = Column(String, unique=True)
     password = Column(String)
     phone = Column(BIGINT)
     
