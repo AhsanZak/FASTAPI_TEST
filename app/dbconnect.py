@@ -8,3 +8,7 @@ collection = db["test"]
 
 def insert_profile_image(data_dict):
     collection.insert_one(data_dict)
+    return "success"
+
+def get_profile_images():
+    return collection.find({})

@@ -4,6 +4,7 @@ from config import SessionLocal
 from sqlalchemy.orm import Session
 from schemas import StudentSchema, RequestStudent, Response
 import crud
+import dbconnect as dbc
 
 router = APIRouter()
 
@@ -21,9 +22,12 @@ async def create(request: RequestStudent, db: Session = Depends(get_db)):
 @router.get("/")
 async def get(db:Session=Depends(get_db)):
     _student = crud.get_student(db)
+    profile_images = dbc.get_profile_images()
 
-    for i in _student:
-        print("thsi si i ", i.id)
+    for file_path in profile_images:
+        for data in _student:
+            if file_path["_id"] == data.id:
+                data.profile = file_path["file_path"]
 
     return Response(code=200, status="Ok", message="Success Fethced all", result=_student).dict(exclude_none=True)
 
